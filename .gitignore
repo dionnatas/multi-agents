@@ -1,0 +1,39 @@
+# Ambiente virtual
+venv/
+env/
+ENV/
+
+# Arquivos de cache do Python
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+
+# Arquivos de distribuição
+dist/
+build/
+*.egg-info/
+
+# Arquivos de log
+*.log
+
+# Arquivos de configuração local
+.env
+.env.local
+
+# Diretórios e arquivos específicos do sistema
+.DS_Store
+.idea/
+.vscode/
+
+# Arquivos temporários
+*.swp
+*.swo
+*~
+
+# Arquivos de chaves API (para segurança)
+*.key
+
+# Arquivos de conversas (podem conter dados sensíveis)
+# Remova esta linha se quiser versionar as conversas
+# src/conversations/

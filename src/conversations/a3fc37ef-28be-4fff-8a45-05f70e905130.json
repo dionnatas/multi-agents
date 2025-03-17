@@ -1,0 +1,48 @@
+{
+  "id": "a3fc37ef-28be-4fff-8a45-05f70e905130",
+  "messages": [
+    {
+      "role": "user",
+      "content": "qual a capital do estado de Minas Gerais?",
+      "timestamp": "2025-03-17T18:19:16.915204"
+    },
+    {
+      "role": "assistant",
+      "content": "A capital do estado de Minas Gerais é Belo Horizonte.",
+      "timestamp": "2025-03-17T18:19:23.158226"
+    },
+    {
+      "role": "user",
+      "content": "e qual a população total deste estado?",
+      "timestamp": "2025-03-17T18:20:09.571234"
+    },
+    {
+      "role": "assistant",
+      "content": "A população de Minas Gerais é de aproximadamente 21 milhões de habitantes, segundo estimativas recentes.",
+      "timestamp": "2025-03-17T18:20:15.269072"
+    },
+    {
+      "role": "user",
+      "content": "e a população total da capital?",
+      "timestamp": "2025-03-17T18:20:44.933712"
+    },
+    {
+      "role": "assistant",
+      "content": "A população de Belo Horizonte é de aproximadamente 2,5 milhões de habitantes.",
+      "timestamp": "2025-03-17T18:20:51.101662"
+    },
+    {
+      "role": "user",
+      "content": "qual o tamanho desta cidade?",
+      "timestamp": "2025-03-17T19:41:28.929515"
+    },
+    {
+      "role": "assistant",
+      "content": "Belo Horizonte tem uma área total de aproximadamente 331 km².",
+      "timestamp": "2025-03-17T19:41:36.267570"
+    }
+  ],
+  "created_at": "2025-03-17T18:19:16.913718",
+  "updated_at": "2025-03-17T19:41:36.267575",
+  "metadata": {}
+}

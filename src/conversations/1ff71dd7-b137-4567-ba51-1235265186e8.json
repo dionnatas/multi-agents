@@ -1,0 +1,48 @@
+{
+  "id": "1ff71dd7-b137-4567-ba51-1235265186e8",
+  "messages": [
+    {
+      "role": "user",
+      "content": "qual a capital de SC-BR",
+      "timestamp": "2025-03-17T19:39:46.579282"
+    },
+    {
+      "role": "assistant",
+      "content": "A capital de Santa Catarina, Brasil, é Florianópolis.",
+      "timestamp": "2025-03-17T19:39:53.364558"
+    },
+    {
+      "role": "user",
+      "content": "e qual a populaãp desta cidade?",
+      "timestamp": "2025-03-17T19:40:07.268096"
+    },
+    {
+      "role": "assistant",
+      "content": "A população de Florianópolis é de aproximadamente 508 mil habitantes, de acordo com estimativas recentes.",
+      "timestamp": "2025-03-17T19:40:13.321632"
+    },
+    {
+      "role": "user",
+      "content": "e qual o preço médio do metro quadrado, em caso de compra de residencia e/ou terrenos na ilha?",
+      "timestamp": "2025-03-17T19:40:42.466510"
+    },
+    {
+      "role": "assistant",
+      "content": "O preço médio do metro quadrado em Florianópolis pode variar dependendo da localização, mas geralmente está entre R$ 8.000 e R$ 12.000, especialmente em áreas mais valorizadas da ilha. Esses valores são aproximados e podem variar com o tempo e a localização específica dentro da cidade.",
+      "timestamp": "2025-03-17T19:40:49.780915"
+    },
+    {
+      "role": "user",
+      "content": "qual o tamanho desta cidade?",
+      "timestamp": "2025-03-17T19:48:53.966048"
+    },
+    {
+      "role": "assistant",
+      "content": "Florianópolis tem uma área total de cerca de 675,4 km². A cidade é conhecida por abranger uma grande parte da Ilha de Santa Catarina.",
+      "timestamp": "2025-03-17T19:49:00.183985"
+    }
+  ],
+  "created_at": "2025-03-17T19:39:46.578133",
+  "updated_at": "2025-03-17T19:49:00.183990",
+  "metadata": {}
+}
