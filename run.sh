@@ -1,21 +1,40 @@
 #!/bin/bash
 
-# Verificar se a chave de API da OpenAI está configurada
-if [ -z "$OPENAI_API_KEY" ]; then
-    echo "ATENÇÃO: A variável de ambiente OPENAI_API_KEY não está configurada."
-    echo "Por favor, configure sua chave de API usando o comando:"
-    echo "export OPENAI_API_KEY='sua-chave-api-aqui'"
-    echo "Ou adicione-a ao seu arquivo ~/.bashrc ou ~/.zshrc"
+# Carregar variáveis de ambiente do arquivo .env se ele existir
+if [ -f ".env" ]; then
+    echo "Carregando variáveis de ambiente do arquivo .env..."
+    # Carregar variáveis do arquivo .env
+    export $(grep -v '^#' .env | xargs)
+    echo "Variáveis de ambiente carregadas com sucesso."
+else
+    echo "Arquivo .env não encontrado. Usando o arquivo .env.example como modelo."
+    echo "Para configurar permanentemente, copie o arquivo .env.example para .env e edite-o."
+    echo "cp .env.example .env"
+    echo "nano .env  # ou use seu editor preferido"
+    echo
     
-    # Solicitar a chave de API do usuário
-    read -p "Deseja informar sua chave de API agora? (s/n): " resposta
-    if [ "$resposta" = "s" ]; then
-        read -p "Digite sua chave de API da OpenAI: " api_key
-        export OPENAI_API_KEY="$api_key"
-        echo "Chave de API configurada temporariamente para esta sessão."
-    else
-        echo "O programa não pode continuar sem uma chave de API válida."
-        exit 1
+    # Verificar se a chave de API da OpenAI está configurada
+    if [ -z "$OPENAI_API_KEY" ]; then
+        echo "ATENÇÃO: A variável de ambiente OPENAI_API_KEY não está configurada."
+        
+        # Solicitar a chave de API do usuário
+        read -p "Deseja informar sua chave de API agora? (s/n): " resposta
+        if [ "$resposta" = "s" ]; then
+            read -p "Digite sua chave de API da OpenAI: " api_key
+            export OPENAI_API_KEY="$api_key"
+            echo "Chave de API configurada temporariamente para esta sessão."
+            
+            # Perguntar se deseja salvar no arquivo .env
+            read -p "Deseja salvar esta chave no arquivo .env para uso futuro? (s/n): " salvar
+            if [ "$salvar" = "s" ]; then
+                echo "Criando arquivo .env..."
+                echo "OPENAI_API_KEY=$api_key" > .env
+                echo "Chave de API salva no arquivo .env."
+            fi
+        else
+            echo "O programa não pode continuar sem uma chave de API válida."
+            exit 1
+        fi
     fi
 fi
 
