@@ -40,9 +40,19 @@
       "role": "assistant",
       "content": "Florianópolis tem uma área total de cerca de 675,4 km². A cidade é conhecida por abranger uma grande parte da Ilha de Santa Catarina.",
       "timestamp": "2025-03-17T19:49:00.183985"
+    },
+    {
+      "role": "user",
+      "content": "quantas prais tem na cidade?",
+      "timestamp": "2025-03-17T20:11:07.307279"
+    },
+    {
+      "role": "assistant",
+      "content": "Florianópolis possui cerca de 42 praias, cada uma com suas características únicas, desde praias mais urbanas e movimentadas até praias mais isoladas e tranquilas.",
+      "timestamp": "2025-03-17T20:11:13.677639"
     }
   ],
   "created_at": "2025-03-17T19:39:46.578133",
-  "updated_at": "2025-03-17T19:49:00.183990",
+  "updated_at": "2025-03-17T20:11:13.677645",
   "metadata": {}
 }

@@ -3,9 +3,9 @@ from pydantic import BaseModel
 import asyncio
 import uuid
 from openai import OpenAI
-from config_manager import ConfigManager
-from logger import Logger
-from error_handler import catch_async_errors, APIKeyError, APIConnectionError, ValidationError
+from src.config_manager import ConfigManager
+from src.logger import Logger
+from src.error_handler import catch_async_errors, APIKeyError, APIConnectionError, ValidationError
 
 # Configurar logger específico para este módulo
 logger = Logger.setup("main")
