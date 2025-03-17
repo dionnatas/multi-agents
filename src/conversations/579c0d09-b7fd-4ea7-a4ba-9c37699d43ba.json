@@ -1,0 +1,19 @@
+{
+  "id": "579c0d09-b7fd-4ea7-a4ba-9c37699d43ba",
+  "name": "Outra historia de SP",
+  "messages": [
+    {
+      "role": "user",
+      "content": "Quando foi fundada a cidade de São Paulo?",
+      "timestamp": "2025-03-17T20:25:25.194477"
+    },
+    {
+      "role": "assistant",
+      "content": "A cidade de São Paulo foi fundada em 25 de janeiro de 1554. A fundação ocorreu com a criação do Colégio de São Paulo de Piratininga pelos padres jesuítas Manuel da Nóbrega e José de Anchieta. Essa data foi escolhida em homenagem à conversão do apóstolo Paulo, que é celebrada nesse dia.\n\nO colégio foi estabelecido em uma pequena aldeia indígena, em um planalto elevado que oferecia proteção natural. A cidade começou a se desenvolver lentamente e, inicialmente, teve um papel central em missões de conversão dos povos indígenas para o cristianismo.\n\nCom o tempo, São Paulo cresceu em importância, principalmente durante os períodos das bandeiras e as rotas de exploração do interior do Brasil, tornando-se eventualmente o grande centro econômico e populacional que é hoje.\n\n[Resposta fornecida pelo Especialista em História]",
+      "timestamp": "2025-03-17T20:25:35.221470"
+    }
+  ],
+  "created_at": "2025-03-17T20:25:25.191999",
+  "updated_at": "2025-03-17T20:25:35.221477",
+  "metadata": {}
+}

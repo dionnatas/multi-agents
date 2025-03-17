@@ -33,6 +33,7 @@ class Message:
 class Conversation:
     """Representa uma conversa completa."""
     id: str
+    name: str = ""
     messages: List[Message] = field(default_factory=list)
     created_at: str = field(default_factory=lambda: datetime.now().isoformat())
     updated_at: str = field(default_factory=lambda: datetime.now().isoformat())
@@ -43,15 +44,18 @@ class ConversationStore:
     """Gerencia o armazenamento e recuperação de conversas."""
 
     @staticmethod
-    def create_conversation() -> str:
+    def create_conversation(name: str = "") -> str:
         """
         Cria uma nova conversa e retorna seu ID.
         
+        Args:
+            name (str, opcional): Nome personalizado para a conversa
+            
         Returns:
             str: ID da conversa criada
         """
         conversation_id = str(uuid.uuid4())
-        conversation = Conversation(id=conversation_id)
+        conversation = Conversation(id=conversation_id, name=name)
         
         # Salvar a conversa vazia
         ConversationStore._save_conversation(conversation)
@@ -72,6 +76,7 @@ class ConversationStore:
         if not conversation:
             # Se a conversa não existir, cria uma nova
             conversation = Conversation(id=conversation_id)
+        # Importante: preservar o nome da conversa se já existir
         
         # Adicionar a mensagem
         message = Message(role=role, content=content)
@@ -103,6 +108,7 @@ class ConversationStore:
             # Reconstruir a conversa a partir dos dados
             conversation = Conversation(
                 id=data['id'],
+                name=data.get('name', ''),  # Carregar o nome da conversa
                 created_at=data['created_at'],
                 updated_at=data['updated_at'],
                 metadata=data.get('metadata', {})

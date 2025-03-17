@@ -58,14 +58,40 @@ async def main():
             print("\nConversas existentes:")
             for i, conv_id in enumerate(conversas, 1):
                 conversa = ConversationStore.get_conversation(conv_id)
-                if conversa and conversa.messages:
-                    primeira_msg = conversa.messages[0].content[:30] + "..." if len(conversa.messages[0].content) > 30 else conversa.messages[0].content
-                    print(f"{i}. ID: {conv_id[:8]}... ({len(conversa.messages)} mensagens) - Início: '{primeira_msg}'")
+                if conversa:
+                    # Adicionar log para depuração
+                    logger.info(f"Conversa {conv_id}: nome='{conversa.name}', mensagens={len(conversa.messages)}")
+                    
+                    # Se a conversa tem um nome personalizado, exibi-lo
+                    if conversa.name and conversa.name.strip():
+                        nome_exibicao = conversa.name
+                        logger.info(f"Usando nome personalizado: {nome_exibicao}")
+                    # Caso contrário, usar a primeira mensagem ou ID como fallback
+                    elif conversa.messages:
+                        nome_exibicao = conversa.messages[0].content[:30] + "..." if len(conversa.messages[0].content) > 30 else conversa.messages[0].content
+                        logger.info(f"Usando primeira mensagem como nome: {nome_exibicao}")
+                    else:
+                        nome_exibicao = f"Conversa {conv_id[:8]}"
+                        logger.info(f"Usando ID como nome: {nome_exibicao}")
+                    
+                    print(f"{i}. {nome_exibicao} ({len(conversa.messages)} mensagens) - ID: {conv_id[:8]}...")
+            
+            # Criar um dicionário para mapear o índice ao nome da conversa
+            nomes_conversas = {}
+            for i, conv_id in enumerate(conversas, 1):
+                conversa = ConversationStore.get_conversation(conv_id)
+                if conversa:
+                    if conversa.name and conversa.name.strip():
+                        nomes_conversas[i] = conversa.name
+                    elif conversa.messages:
+                        nomes_conversas[i] = conversa.messages[0].content[:20] + "..." if len(conversa.messages[0].content) > 20 else conversa.messages[0].content
+                    else:
+                        nomes_conversas[i] = f"Conversa {conv_id[:8]}"
             
             print("\nEscolha uma opção:")
             print("0. Iniciar uma nova conversa")
             for i in range(1, len(conversas) + 1):
-                print(f"{i}. Continuar conversa {i}")
+                print(f"{i}. Continuar '{nomes_conversas[i]}'")
             
             try:
                 escolha = int(input("\nDigite o número da sua escolha: "))
@@ -76,12 +102,27 @@ async def main():
                 else:
                     logger.info("Usuário escolheu iniciar nova conversa")
                     print("\nIniciando uma nova conversa...")
+                    nome_conversa = input("\nDigite um nome para esta conversa: ")
+                    if nome_conversa.strip():
+                        conversation_id = ConversationStore.create_conversation(nome_conversa.strip())
+                        logger.info(f"Nova conversa criada com nome: {nome_conversa}")
+                        print(f"\nNova conversa '{nome_conversa}' iniciada!")
             except ValueError:
                 logger.warning("Entrada inválida ao escolher conversa")
                 print("\nOpção inválida. Iniciando uma nova conversa...")
+                nome_conversa = input("\nDigite um nome para esta conversa: ")
+                if nome_conversa.strip():
+                    conversation_id = ConversationStore.create_conversation(nome_conversa.strip())
+                    logger.info(f"Nova conversa criada com nome: {nome_conversa}")
+                    print(f"\nNova conversa '{nome_conversa}' iniciada!")
         else:
             logger.info("Nenhuma conversa anterior encontrada")
             print("\nNenhuma conversa anterior encontrada. Iniciando uma nova conversa...")
+            nome_conversa = input("\nDigite um nome para esta conversa: ")
+            if nome_conversa.strip():
+                conversation_id = ConversationStore.create_conversation(nome_conversa.strip())
+                logger.info(f"Nova conversa criada com nome: {nome_conversa}")
+                print(f"\nNova conversa '{nome_conversa}' iniciada!")
         
         print("\nDigite 'sair' a qualquer momento para encerrar o programa.")
         print("Digite 'nova' para iniciar uma nova conversa.")
@@ -101,6 +142,11 @@ async def main():
                 conversation_id = None
                 logger.info("Usuário solicitou nova conversa")
                 print("Iniciando uma nova conversa...")
+                nome_conversa = input("\nDigite um nome para esta conversa: ")
+                if nome_conversa.strip():
+                    conversation_id = ConversationStore.create_conversation(nome_conversa.strip())
+                    logger.info(f"Nova conversa criada com nome: {nome_conversa}")
+                    print(f"\nNova conversa '{nome_conversa}' iniciada!")
                 continue
             
             # Verificar se a pergunta não está vazia
@@ -118,7 +164,13 @@ async def main():
                 
                 logger.info(f"Resposta obtida com sucesso, ID da conversa: {conversation_id}")
                 print(f"\nResposta: {resposta}")
-                print(f"\n[ID da conversa: {conversation_id[:8]}...]")
+                
+                # Obter o nome da conversa para exibição
+                conversa = ConversationStore.get_conversation(conversation_id)
+                if conversa and conversa.name:
+                    print(f"\n[Conversa: '{conversa.name}' | ID: {conversation_id[:8]}...]")
+                else:
+                    print(f"\n[ID da conversa: {conversation_id[:8]}...]")
             except ValidationError as e:
                 logger.error(f"Erro de validação: {str(e)}")
                 print(f"\nErro de validação: {str(e)}")

@@ -56,6 +56,8 @@ async def processar_pergunta_com_contexto(pergunta: str, conversation_id: str = 
     
     # Se não foi fornecido um ID de conversa, cria uma nova
     if not conversation_id:
+        # Note que a criação da conversa com nome é feita na interface do usuário (interativo_com_contexto.py)
+        # Aqui apenas criamos uma conversa sem nome caso não tenha sido criada antes
         conversation_id = ConversationStore.create_conversation()
         logger.info(f"Nova conversa criada com ID: {conversation_id}")
     else:

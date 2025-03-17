@@ -1,0 +1,19 @@
+{
+  "id": "6c69af78-290d-4ef2-ad5c-0886f55416fe",
+  "name": "Sobre história de SP",
+  "messages": [
+    {
+      "role": "user",
+      "content": "Quantos anos tem a avenida Paulista?",
+      "timestamp": "2025-03-17T20:28:02.619026"
+    },
+    {
+      "role": "assistant",
+      "content": "A Avenida Paulista, um dos principais símbolos de São Paulo e talvez a avenida mais famosa do Brasil, foi inaugurada em 8 de dezembro de 1891. Portanto, em 2023, ela completa 132 anos. Originalmente, a avenida foi projetada para abrigar mansões de famílias aristocráticas, mas ao longo dos anos se transformou em um importante centro financeiro e cultural da cidade.\n\n[Resposta fornecida pelo Especialista em História]",
+      "timestamp": "2025-03-17T20:28:11.287478"
+    }
+  ],
+  "created_at": "2025-03-17T20:27:51.782756",
+  "updated_at": "2025-03-17T20:28:11.287486",
+  "metadata": {}
+}

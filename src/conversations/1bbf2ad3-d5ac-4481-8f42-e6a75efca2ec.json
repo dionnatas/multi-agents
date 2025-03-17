@@ -1,0 +1,19 @@
+{
+  "id": "1bbf2ad3-d5ac-4481-8f42-e6a75efca2ec",
+  "name": "Teste",
+  "messages": [
+    {
+      "role": "user",
+      "content": "nada, obrigado por existir.",
+      "timestamp": "2025-03-17T20:35:49.295717"
+    },
+    {
+      "role": "assistant",
+      "content": "Obrigado pela gentileza! Se precisar de algo, estou aqui para ajudar. 😊",
+      "timestamp": "2025-03-17T20:35:55.035141"
+    }
+  ],
+  "created_at": "2025-03-17T20:35:39.484809",
+  "updated_at": "2025-03-17T20:35:55.035147",
+  "metadata": {}
+}
