@@ -51,9 +51,19 @@
       "role": "assistant",
       "content": "Florianópolis possui cerca de 42 praias, cada uma com suas características únicas, desde praias mais urbanas e movimentadas até praias mais isoladas e tranquilas.",
       "timestamp": "2025-03-17T20:11:13.677639"
+    },
+    {
+      "role": "user",
+      "content": "qual o bairro mais populoso?",
+      "timestamp": "2025-03-18T11:47:44.409101"
+    },
+    {
+      "role": "assistant",
+      "content": "O bairro mais populoso de Florianópolis é o Continente, especificamente as áreas de Estreito e Capoeiras, que são bastante densas em termos de população.",
+      "timestamp": "2025-03-18T11:47:51.708698"
     }
   ],
   "created_at": "2025-03-17T19:39:46.578133",
-  "updated_at": "2025-03-17T20:11:13.677645",
+  "updated_at": "2025-03-18T11:47:51.708713",
   "metadata": {}
 }

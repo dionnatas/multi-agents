@@ -17,37 +17,27 @@ from src.processar_com_contexto import processar_pergunta_com_contexto
 from src.config_manager import ConfigManager
 from src.logger import Logger
 from src.error_handler import catch_async_errors, APIKeyError, APIConnectionError, ValidationError
+from src.ui_utils import (
+    exibir_cabecalho_sistema, 
+    verificar_api_key, 
+    processar_pergunta_padrao,
+    verificar_comando_saida,
+    verificar_pergunta_vazia
+)
 
 # Configurar logger específico para este módulo
 logger = Logger.setup("interativo_contexto")
 
 # Verificar se a chave de API da OpenAI está configurada
-if not ConfigManager.validate_api_key():
-    logger.error("API Key não configurada. O sistema não pode funcionar corretamente.")
-    print("ERRO: OPENAI_API_KEY não está configurada.")
-    print("Por favor, execute o script run.sh para configurar a variável de ambiente.")
+if not verificar_api_key():
     sys.exit(1)
 
 @catch_async_errors
 async def main():
     """Função principal para interação com o usuário."""
     try:
-        logger.info("Iniciando o Sistema Educacional Multi-Agentes com contexto")
-        
-        print("=" * 50)
-        print("      Sistema Educacional Multi-Agentes")
-        print("=" * 50)
-        print("Iniciando o sistema...")
-        
-        # Obter a chave da API de forma segura
-        api_key = ConfigManager.get_api_key()
-        if api_key:
-            print(f"\nAPI Key detectada: {api_key[:8]}...")
-        
-        print("\n=== Sistema Educacional de Perguntas e Respostas ===")
-        print("Este sistema utiliza agentes especializados para responder suas perguntas.")
-        print("Cada pergunta é classificada e encaminhada para o especialista adequado.")
-        print("O sistema mantém o contexto da conversa entre perguntas.")
+        # Exibir cabeçalho do sistema usando a função do módulo ui_utils
+        exibir_cabecalho_sistema(com_contexto=True)
     
         # Listar conversas existentes
         conversas = ConversationStore.list_conversations()
@@ -132,9 +122,7 @@ async def main():
             pergunta = input("\nDigite sua pergunta: ")
             
             # Verificar comando de saída
-            if pergunta.lower() == 'sair':
-                logger.info("Usuário solicitou encerramento do programa")
-                print("Encerrando o programa...")
+            if verificar_comando_saida(pergunta):
                 break
             
             # Verificar comando para nova conversa
@@ -150,18 +138,19 @@ async def main():
                 continue
             
             # Verificar se a pergunta não está vazia
-            if not pergunta.strip():
-                print("\nA pergunta não pode estar vazia. Por favor, tente novamente.")
+            if verificar_pergunta_vazia(pergunta):
                 continue
             
-            # Processar a pergunta
-            try:
-                logger.info(f"Processando pergunta: '{pergunta[:30]}{'...' if len(pergunta) > 30 else ''}'")
-                print("\nProcessando sua pergunta, aguarde um momento...")
-                
-                # Chamar a função assíncrona corretamente
-                resposta, conversation_id = await processar_pergunta_com_contexto(pergunta, conversation_id)
-                
+            # Criar uma função de processamento específica para este caso
+            async def processar_com_contexto(p):
+                return await processar_pergunta_com_contexto(p, conversation_id)
+            
+            # Processar a pergunta usando a função padronizada
+            sucesso, resultado = await processar_pergunta_padrao(pergunta, processar_com_contexto)
+            
+            # Se o processamento foi bem-sucedido, exibir o resultado
+            if sucesso:
+                resposta, conversation_id = resultado
                 logger.info(f"Resposta obtida com sucesso, ID da conversa: {conversation_id}")
                 print(f"\nResposta: {resposta}")
                 
@@ -171,15 +160,6 @@ async def main():
                     print(f"\n[Conversa: '{conversa.name}' | ID: {conversation_id[:8]}...]")
                 else:
                     print(f"\n[ID da conversa: {conversation_id[:8]}...]")
-            except ValidationError as e:
-                logger.error(f"Erro de validação: {str(e)}")
-                print(f"\nErro de validação: {str(e)}")
-            except APIConnectionError as e:
-                logger.error(f"Erro de conexão com a API: {str(e)}")
-                print(f"\nErro de conexão: {str(e)}")
-            except Exception as e:
-                logger.error(f"Erro inesperado: {str(e)}", exc_info=True)
-                print(f"\nOcorreu um erro inesperado: {str(e)}")
     except Exception as e:
         logger.critical(f"Erro fatal na execução do programa: {str(e)}", exc_info=True)
         print(f"\nErro fatal: {str(e)}")
